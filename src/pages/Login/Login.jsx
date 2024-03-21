@@ -7,6 +7,7 @@ import signinSchema from "../../schema/signin.schema.js";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "../../services/segnin.js";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,9 @@ export default function Login() {
       .then((response) => {
         const token = response.data;
         console.log(token);
-        // navigate('/');
+        Cookies.set('token', token, {expires: 7});
+        console.log('logado com sucesso')
+        navigate('/');
       })
       .catch((e) => {
         setTeste(e.response.data.message);

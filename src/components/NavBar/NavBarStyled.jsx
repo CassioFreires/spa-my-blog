@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
     display: flex;
-    justify-content: space-between;
+    justify-content: ${({ token }) => (token ? 'space-around' : 'space-between')};
 
 `
 
@@ -19,16 +19,15 @@ export const NavBarStyled = styled.nav`
         justify-content: space-between;
     }
 
+
     li {
         width: 125px;
         height: 50px;
         transition: background-position-x 0.9s linear;
         text-align: center;
-
         a {
-            font-size: 22px;
+            font-size: 1rem;
             color: #777;
-            font-weight: bold;
             text-decoration: none;
             transition: all 0.45s;
         }
@@ -46,6 +45,13 @@ export const NavBarStyled = styled.nav`
         &:not(:last-child) {
             margin-right: 30px;
         }
+
+
+    }
+    .menu-signin {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
 `

@@ -3,6 +3,7 @@ import Card from "../../components/Card/Card";
 import { Container } from "./HomeStyled";
 import { findAllService } from "../../services/posts.js";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [postagens, setPostagens] = useState([]);
@@ -12,7 +13,6 @@ export default function Home() {
     useEffect(() => {
         findAllService()
           .then((response) => {
-            console.log(response.data.length)
             if(!response.data || response.data.length < 0) {
                 setError('Não há nenhuma postagem até o momento');
                 return;
@@ -22,7 +22,7 @@ export default function Home() {
           .catch((e) => console.log(e));
       }, []);
   }
-  posts()
+  posts();
 
   return (
     <Container>
@@ -34,7 +34,11 @@ export default function Home() {
         {postagens.length < 0 ? 
             <p>{error}</p>
             :
-            postagens.map((item, index) => {return <Card key={index} title={item.title} text={item.text} image={item.image}/>})
+            postagens.map((item, index) => {return <Card 
+              key={index} 
+              title={item.title} 
+              text={item.text} 
+              image={item.image}/>})
         }
       </section>
     </Container>
